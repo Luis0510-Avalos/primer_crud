@@ -50,6 +50,9 @@ if (isset($_GET['editar'])) {
         $direccion = $dato['direccion'];
         $puesto = $dato['puesto'];
     }
+
+
+
 }
 
 
@@ -103,15 +106,6 @@ $resultado = $sentencia->fetchAll();
                             </div>
                             <div class="modal-body">
 
-                            <?php
-                                        if(isset($_GET['editar'])){
-                                            $prueba = $_GET['editar'];
-                                            echo $prueba;
-                                        }else{
-                                            echo "No hay envio de id";
-                                        }
-                                    ?>
-
                                 <form action="index.php" method="POST">
 
                                     <input type="hidden" name="id_trabajador" value="<?php echo (isset($ide)) ? $ide : " "; ?>">
@@ -131,10 +125,9 @@ $resultado = $sentencia->fetchAll();
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                         <input type="submit" class="btn btn-primary" value="<?php echo $nombre ? 'Actualizar' : 'Agregar'; ?>">
                                     </div>
-
-
+                                    
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -167,7 +160,10 @@ $resultado = $sentencia->fetchAll();
                                     <td><?php echo $trabajador['direccion']; ?></td>
                                     <td><?php echo $trabajador['puesto']; ?></td>
                                     <td>
-                                        <a href="?editar=<?php echo $trabajador['id']; ?>" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Editar</a>
+                                        <form action="update.php" method="GET">
+                                            <input type="hidden" name="editar" value="<?php echo $trabajador['id']; ?>">
+                                            <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Editar</button>
+                                        </form>
                                         |
                                         <a href="?borrar=<?php echo $trabajador['id']; ?>" class="btn btn-danger">Eliminar</a>
                                     </td>
